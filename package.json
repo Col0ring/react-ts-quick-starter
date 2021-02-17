@@ -22,6 +22,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "antd": "^4.12.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },
@@ -36,6 +37,7 @@
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
+    "@types/babel__traverse": "^7.11.0",
     "@types/compression-webpack-plugin": "^6.0.4",
     "@types/copy-webpack-plugin": "^6.4.0",
     "@types/cors": "^2.8.9",
@@ -57,6 +59,7 @@
     "@typescript-eslint/parser": "^4.15.0",
     "autoprefixer": "^10.2.4",
     "babel-loader": "^8.2.2",
+    "babel-plugin-import": "^1.13.3",
     "chalk": "^4.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "compression-webpack-plugin": "^7.1.2",

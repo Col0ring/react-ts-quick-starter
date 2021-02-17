@@ -2,7 +2,7 @@ import FriendlyErrorsWebpackPlugin, {
   WebpackError,
 } from 'friendly-errors-webpack-plugin'
 import notifier from 'node-notifier'
-import { isDev } from '../config'
+import { isDev, isNotify } from '../config'
 
 function PluginGenerator(port?: number) {
   return new FriendlyErrorsWebpackPlugin({
@@ -24,11 +24,13 @@ function PluginGenerator(port?: number) {
       }
       const error = (errors[0] as unknown) as WebpackError
       // 桌面通知
-      notifier.notify({
-        title: 'webpack compile failed',
-        message: `${severity} ${error.name}`,
-        subtitle: error.file || '',
-      })
+      if (isNotify) {
+        notifier.notify({
+          title: 'webpack compile failed',
+          message: `${severity} ${error.name}`,
+          subtitle: error.file || '',
+        })
+      }
     },
   })
 }

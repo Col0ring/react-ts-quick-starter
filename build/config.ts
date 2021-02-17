@@ -5,5 +5,14 @@ const bannerDescription =
 const devPort = 9527
 const isOpenBrowser = false
 const mock = true
+const isNotify = false
 
-export { isDev, projectName, devPort, isOpenBrowser, bannerDescription, mock }
+export {
+  isDev,
+  isNotify,
+  projectName,
+  devPort,
+  isOpenBrowser,
+  bannerDescription,
+  mock,
+}

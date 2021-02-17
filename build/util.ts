@@ -28,6 +28,41 @@ const getCssLoaders = (importLoaders: number): RuleSetUseItem[] => [
   },
 ]
 
+const getCssModuleLoaders = (importLoaders: number): RuleSetUseItem[] => [
+  isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+  {
+    loader: 'css-loader',
+    options: {
+      modules: {
+        localIdentName: '[local]_[hash:base64:5]',
+        exportLocalsConvention: 'camelCase',
+        auto: true,
+      },
+      sourceMap: isDev,
+      importLoaders,
+    },
+  },
+  {
+    loader: 'postcss-loader',
+    options: {
+      sourceMap: isDev,
+    },
+  },
+]
+
+const getLessLoaders = (): RuleSetUseItem[] => [
+  {
+    loader: 'less-loader',
+    options: {
+      sourceMap: isDev,
+      lessOptions: {
+        javascriptEnabled: true,
+        modifyVars: {},
+      },
+    },
+  },
+]
+
 async function getRandomPort(preferredPort: number) {
   const port = await getPort({
     host: '0.0.0.0',
@@ -93,4 +128,11 @@ async function loadMockRoutes(
   return null
 }
 
-export { resolve, getCssLoaders, getRandomPort, loadMockRoutes }
+export {
+  resolve,
+  getCssLoaders,
+  getCssModuleLoaders,
+  getLessLoaders,
+  getRandomPort,
+  loadMockRoutes,
+}

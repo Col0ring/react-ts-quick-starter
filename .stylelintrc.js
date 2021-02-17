@@ -19,6 +19,12 @@ module.exports = {
     'no-descending-specificity': null,
     'no-invalid-double-slash-comments': null,
     'rule-empty-line-before': ['always', { except: ['first-nested'] }],
+    'selector-pseudo-class-no-unknown': [
+      true,
+      {
+        ignorePseudoClasses: ['global'],
+      },
+    ],
   },
   // stylelint 支持直接配置忽略文件
   ignoreFiles: ['node_modules/**/*', 'dist/**/*'],

@@ -5,8 +5,14 @@ import StylelintPlugin from 'stylelint-webpack-plugin'
 import EslintPlugin from 'eslint-webpack-plugin'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import WebpackBar from 'webpackbar'
-import { resolve, getCssLoaders } from '../util'
+import {
+  resolve,
+  getCssLoaders,
+  getCssModuleLoaders,
+  getLessLoaders,
+} from '../util'
 import { isDev, projectName } from '../config'
+import AutoCssModules from '../plugins/AutoCssModules'
 
 const commonConfig: Configuration = {
   target: 'web',
@@ -55,6 +61,8 @@ const commonConfig: Configuration = {
             loader: 'babel-loader',
             options: {
               cacheDirectory: true,
+              // 自动识别 css modules
+              plugins: [AutoCssModules()],
             },
           },
         ],
@@ -62,16 +70,27 @@ const commonConfig: Configuration = {
         exclude: /node_modules/,
         include: resolve('../src'),
       },
-      { test: /.(css)$/, use: getCssLoaders(1) },
+      {
+        test: /.(css)$/,
+        oneOf: [
+          {
+            resourceQuery: /modules/,
+            use: getCssModuleLoaders(1),
+          },
+          {
+            use: getCssLoaders(1),
+          },
+        ],
+      },
       {
         test: /\.less$/,
-        use: [
-          ...getCssLoaders(2),
+        oneOf: [
           {
-            loader: 'less-loader',
-            options: {
-              sourceMap: isDev,
-            },
+            resourceQuery: /modules/,
+            use: [...getCssModuleLoaders(2), ...getLessLoaders()],
+          },
+          {
+            use: [...getCssLoaders(2), ...getLessLoaders()],
           },
         ],
       },

@@ -31,6 +31,15 @@ module.exports = {
         useESModules: true,
       },
     ],
+    [
+      // antd 按需引入
+      'import',
+      {
+        libraryName: 'antd',
+        libraryDirectory: 'es',
+        style: true,
+      },
+    ],
   ],
   env: {
     development: {
