@@ -86,6 +86,7 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': OFF,
     '@typescript-eslint/no-explicit-any': OFF,
     '@typescript-eslint/no-unused-vars': WARN,
+    '@typescript-eslint/no-shadow': ERROR,
 
     'react/jsx-filename-extension': [
       ERROR,
@@ -116,4 +117,13 @@ module.exports = {
     'promise/always-return': OFF,
     'no-restricted-syntax': OFF,
   },
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      rules: {
+        // use @typescript-eslint/no-shadow
+        'no-shadow': [OFF],
+      },
+    },
+  ],
 }
